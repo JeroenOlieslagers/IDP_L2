@@ -1,11 +1,17 @@
 #pragma once
 
+#include <Wire.h>
+#include <Adafruit_MotorShield.h>
+#include "utility/Adafruit_MS_PWMServoDriver.h"
+
 class IrReading
 {
   int irReadingValue = 0;
+  int pinNumber = A0;
   char irPort;
 public:
-  void updateValue(int);
+  void updateValue();
+  void setPinNumber(int);
   int getValue();
 };
 

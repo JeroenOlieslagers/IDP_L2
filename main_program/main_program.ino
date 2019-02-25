@@ -15,14 +15,15 @@ void setup() {
   motor.start();
   motor.setMotors(1,4);
   motor.setMotorSpeed(255, 240);
+  irReadingColour.setPinNumber(A0);
 }
 
 void loop()
 {
-  /*if (readingDelayCounter == readingDelay)
+  
+  if (readingDelayCounter == readingDelay)
   {
-    irSensorReading = analogRead(A0);
-    irReadingColour.updateValue(irSensorReading);
+    irReadingColour.updateValue();
     irReadingColour.updateColour();
     Serial.println(irReadingColour.getColourString());
     readingDelayCounter = 0;
@@ -37,9 +38,10 @@ void loop()
   {
     motor.runMotor(false, 'b');
   }
-  */
+  /*
   count++;
   if (count == 1){
-    motor.turn('r');
+    motor.runMotor(true, 'b');
   }
+  */
 }
