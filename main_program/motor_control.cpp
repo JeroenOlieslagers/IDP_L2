@@ -4,22 +4,22 @@ Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 Adafruit_DCMotor *myMotorL = AFMS.getMotor(1);
 Adafruit_DCMotor *myMotorR = AFMS.getMotor(4);
 
-void Mmotor::begin() {
+void RobotMotor::start() {
 	AFMS.begin();
 }
 
-void Mmotor::setMotors(int mL, int mR) {
+void RobotMotor::setMotors(int mL, int mR) {
 	Adafruit_DCMotor *myMotorL = AFMS.getMotor(mL);
 	Adafruit_DCMotor *myMotorR = AFMS.getMotor(mR);
 }
 
-void Mmotor::setMotorSpeed(int mL, int mR) {
+void RobotMotor::setMotorSpeed(int mL, int mR) {
 	//Sets speed of motors
 	myMotorL->setSpeed(mL);
 	myMotorR->setSpeed(mR);
 }
 
-void Mmotor::runMotor(bool boo, char motor) {
+void RobotMotor::runMotor(bool boo, char motor) {
 	//Runs or stops individual motors
 	if (boo && (motor == 'l')) {
 		myMotorL->run(FORWARD);
@@ -43,7 +43,7 @@ void Mmotor::runMotor(bool boo, char motor) {
 	}
 }
 
-void Mmotor::turn(char dir) {
+void RobotMotor::turn(char dir) {
 	//Turns robot 'o' for 180 degrees turn
 	if (dir == 'r') {
 		myMotorL->run(FORWARD);
