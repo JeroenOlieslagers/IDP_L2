@@ -5,10 +5,10 @@
 #include <Adafruit_MotorShield.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
 
-class Mmotor {
+class RobotMotor {
 	//Motors are referred to as left and right ('l', 'r') not 1 and 2
 public:
-	void begin();
+	void start();
 
 	void setMotors(int mL, int mR);
 

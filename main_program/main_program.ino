@@ -2,7 +2,7 @@
 #include "motor_control.h"
 
 IrReadingColour irReadingColour;
-Mmotor motor;
+RobotMotor motor;
 long count;
 int irSensorReading = 0;
 Colour defaultColour = black;
@@ -12,6 +12,7 @@ int readingDelayCounter = 0;
 
 void setup() {
   Serial.begin(9600);
+  motor.start();
   motor.setMotors(1,4);
   motor.setMotorSpeed(255, 240);
 }
