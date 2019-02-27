@@ -1,4 +1,14 @@
 #pragma once
+
+/*
+Class for accessing the Ultrasound sensor reading.
+In setup, set the trigger and echo pins using setPins(). This sets
+appropriate pin to Input and Output. Distance to the nearest obstacle
+is stored in usDistance and can be accessed through getValue(). Before
+accessing the value, make sure the reading is up to date using 
+updateValue().
+*/
+
 class UsReading
 {
   int usDistance = 0;
@@ -17,7 +27,10 @@ getSpeedDiff updates the ultrasound sensor reading and uses it to calculate
 the difference in speed that should be applied to motors. The difference 
 should be added to the left motor assuming the ultrasound sensor is mounted
 on the LHS of the chassis.
+<<<<<<< HEAD
 getSpeedDiff is a PD controller, which depends on kp, kd and samplingRate
+=======
+>>>>>>> master
 */
 
 class UsReadingControl: public UsReading

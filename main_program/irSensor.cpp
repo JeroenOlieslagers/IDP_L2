@@ -1,8 +1,12 @@
 #include "irSensor.h"
 
-void IrReading::updateValue(int sensorIrValue)
+void IrReading::setPinNumber(int pin){
+  pinNumber = pin;
+}
+
+void IrReading::updateValue()
 {
-  irReadingValue = sensorIrValue;
+  irReadingValue = analogRead(pinNumber);
 }
 
 int IrReading::getValue()
