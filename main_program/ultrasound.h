@@ -34,7 +34,7 @@ class UsReadingControl: public UsReading
   int targetDistance = 0;
   int usDistance = 0;
   int speedDiff = 0;
-  const int kp = 3;
+  const int kp = 1;
 public:
   void setTargetDistance(int);
   int getSpeedDiff();

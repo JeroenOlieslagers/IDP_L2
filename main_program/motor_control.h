@@ -22,13 +22,16 @@ public:
 	void setMotorSpeed(int mL, int mR);
 
   //Changes motor speeds to update path of robot (+ve for right -ve for left)
-  void adjustCourse(int diff);
+  void adjustSpeed(int diff);
 
 	//Sets motor (L or R) to run (true) or stop (false)
 	void runMotor(bool boo, char motor);
 
 	//Tells robot to turn left ('l') or right ('r') or 180 degrees ('o')
 	void turn(char dir);
+
+  /********TRIAL**********/
+  void nudge(char dir);
 };
 
 

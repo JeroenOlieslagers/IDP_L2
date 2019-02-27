@@ -23,26 +23,38 @@ void RobotMotor::setMotorSpeed(int mL, int mR) {
 	myMotorR->setSpeed(mR);
 }
 
-void RobotMotor::adjustCourse(int diff){
+void RobotMotor::adjustSpeed(int diff){
   //Edge case that left motor reaches max speed
-  if(currentL >= 255 - diff && currentR >= 50 + (2*diff)){
-    Serial.println(1);
-    currentR -= 2 * diff;
-    setMotorSpeed(currentL, currentR);
+  if(currentL >= 255 - diff && currentR >= 2*diff){
+    currentR -= diff;
+  }
+  else if(currentL >= 255 - diff){
+    Serial.println('ERROR, CANNOT DECREASE R FURTHER');
   }
   //Edge case that right motor reaches min speed
-  else if(currentL <= 255 - (2 * diff) && currentR <= 50 + diff){
-    Serial.println(2);
-    currentL += 2 * diff;
-    setMotorSpeed(currentL, currentR);
+  else if(currentL <= 255 - (2 * diff) && currentR <= diff){
+    currentL += diff;
   }
-  else{
-    Serial.println(3);
+  else if (currentL <= 255 - diff){
     currentL += diff;
     currentR -= diff;
-    setMotorSpeed(currentL, currentR);
   }
-  
+  else{
+    Serial.println('wtf');
+  }
+  if (currentL > 255){
+    currentL = 255;
+  }
+  if (currentL < 0){
+    currentL = 0;
+  }
+  if (currentR > 255){
+    currentR = 255;
+  }
+  if (currentR < 0){
+    currentR = 0;
+  }
+  setMotorSpeed(currentL, currentR);
 }
 
 void RobotMotor::runMotor(bool boo, char motor) {
@@ -69,7 +81,20 @@ void RobotMotor::runMotor(bool boo, char motor) {
 	}
 }
 
+void RobotMotor::nudge(char dir){
+  if (dir == 'r'){
+    currentL -= 50;
+    setMotorSpeed(currentL, currentR);
+    delay(500);
+    currentL += 50;
+    setMotorSpeed(currentL, currentR);
+  }
+}
+
 void RobotMotor::turn(char dir) {
+  setMotorSpeed(255, 240);
+  myMotorL->run(RELEASE);
+  myMotorR->run(RELEASE);
 	//Turns robot 'o' for 180 degrees turn
 	if (dir == 'r') {
 		myMotorL->run(FORWARD);
@@ -86,4 +111,5 @@ void RobotMotor::turn(char dir) {
 		delay(5800);
 		myMotorL->run(RELEASE);
 	}
+ setMotorSpeed(currentL, currentR);
 }
