@@ -5,8 +5,8 @@ void UsReading::setPins(int trig, int echo)
 {
   this->trigPin = trig;
   this->echoPin = echo;
-  pinMode(2, OUTPUT); // Sets the trigPin as an Output
-  pinMode(3, INPUT); // Sets the echoPin as an Input
+  pinMode(trig, OUTPUT); // Sets the trigPin as an Output
+  pinMode(echo, INPUT); // Sets the echoPin as an Input
 }
 
 void UsReading::updateValue()
