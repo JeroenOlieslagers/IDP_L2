@@ -9,3 +9,27 @@ public:
   void updateValue();
   int getValue();
 };
+
+/*
+Class for motor control system for driving in a straight line using
+ultrasound sensor reading. Set the trigger and echo pins using setPins().
+getSpeedDiff updates the ultrasound sensor reading and uses it to calculate
+the difference in speed that should be applied to motors. The difference 
+should be added to the left motor assuming the ultrasound sensor is mounted
+on the LHS of the chassis.
+getSpeedDiff is a PD controller, which depends on kp, kd and samplingRate
+*/
+
+class UsReadingControl: public UsReading
+{
+  int targetDistance = 0;
+  int usDistance = 0;
+  int speedDiff = 0;
+  int prevDistance;
+  const float kp = 3.0;
+  const float kd = 1.0;
+  const float samplingRate = 10.0;
+public:
+  void setTargetDistance(int);
+  int getSpeedDiff();
+};
