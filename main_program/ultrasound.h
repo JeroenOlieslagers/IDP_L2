@@ -27,10 +27,7 @@ getSpeedDiff updates the ultrasound sensor reading and uses it to calculate
 the difference in speed that should be applied to motors. The difference 
 should be added to the left motor assuming the ultrasound sensor is mounted
 on the LHS of the chassis.
-<<<<<<< HEAD
 getSpeedDiff is a PD controller, which depends on kp, kd and samplingRate
-=======
->>>>>>> master
 */
 
 class UsReadingControl: public UsReading
