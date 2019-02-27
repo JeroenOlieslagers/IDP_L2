@@ -36,11 +36,13 @@ void UsReadingControl::setTargetDistance(int _targetDistance)
 
 int UsReadingControl::getSpeedDiff()
 {
+  this->prevDistance = getValue();
   updateValue();
   // Motor is mounted on the left side. Difference is added to the left
   // motor. If targetDistance is bigger than current distance, the robot
   // should turn right, so left motor speed should increase, so difference
   // should be positive.
-  this->speedDiff = (targetDistance - getValue())*kp;
+  this->speedDiff = (int)round((targetDistance - getValue())*kp 
+    + (getValue()-prevDistance)*kd/samplingRate);
   return speedDiff;
 }
