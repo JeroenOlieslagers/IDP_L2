@@ -27,12 +27,16 @@ void UsReading::updateValue()
 int UsReading::getValue()
 {
   updateValue();
+  // Guarding against unexpectedly large readings
+  while (usDistance>250)
+  {
+    updateValue();
+  }
   return usDistance;
 }
 
 void UsReadingControl::setPins(int trigF, int echoF, int trigB, int echoB)
 {
-  Serial.println("Setting pins");
   usReadingFront.setPins(trigF, echoF);
   usReadingBack.setPins(trigB, echoB);
 }
@@ -54,6 +58,9 @@ int UsReadingControl::getSpeedDiff()
   // motor. If distB is bigger than distF, the robot
   // should turn right, so left motor speed should increase, so difference
   // should be positive.
-  this->speedDiff = (int)round((usReadingBack.getValue() - usReadingFront.getValue())*kp);
+  int backReading = usReadingBack.getValue();
+  delayMicroseconds(10);
+  int frontReading = usReadingFront.getValue();
+  this->speedDiff = (int)round((backReading - frontReading)*kp);
   return speedDiff;
 }
