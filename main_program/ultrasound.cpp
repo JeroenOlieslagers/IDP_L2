@@ -26,23 +26,34 @@ void UsReading::updateValue()
 
 int UsReading::getValue()
 {
+  updateValue();
   return usDistance;
 }
 
-void UsReadingControl::setTargetDistance(int _targetDistance)
+void UsReadingControl::setPins(int trigF, int echoF, int trigB, int echoB)
 {
-  this->targetDistance = _targetDistance;
+  Serial.println("Setting pins");
+  usReadingFront.setPins(trigF, echoF);
+  usReadingBack.setPins(trigB, echoB);
+}
+
+int UsReadingControl::getFrontDist()
+{
+  return usReadingFront.getValue();
+}
+
+int UsReadingControl::getBackDist()
+{
+  return usReadingBack.getValue();
 }
 
 int UsReadingControl::getSpeedDiff()
 {
-  this->prevDistance = getValue();
-  updateValue();
-  // Motor is mounted on the left side. Difference is added to the left
-  // motor. If targetDistance is bigger than current distance, the robot
+  // Reading distF is from sensor in the front of the robot. distB from
+  // sensor in the back. Difference is added to the left
+  // motor. If distB is bigger than distF, the robot
   // should turn right, so left motor speed should increase, so difference
   // should be positive.
-  this->speedDiff = (int)round((targetDistance - getValue())*kp 
-    + (getValue()-prevDistance)*kd/samplingRate);
+  this->speedDiff = (int)round((usReadingBack.getValue() - usReadingFront.getValue())*kp);
   return speedDiff;
 }

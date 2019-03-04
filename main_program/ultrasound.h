@@ -2,11 +2,11 @@
 
 /*
 Class for accessing the Ultrasound sensor reading.
-In setup, set the trigger and echo pins using setPins(). This sets
+Pins are set during class construction. This sets
 appropriate pin to Input and Output. Distance to the nearest obstacle
-is stored in usDistance and can be accessed through getValue(). Before
-accessing the value, make sure the reading is up to date using 
-updateValue().
+is stored in usDistance and can be accessed through getValue(). The 
+distance is taken when that function is called, and the class attribute
+is updated.
 */
 
 class UsReading
@@ -22,24 +22,26 @@ public:
 
 /*
 Class for motor control system for driving in a straight line using
-ultrasound sensor reading. Set the trigger and echo pins using setPins().
-getSpeedDiff updates the ultrasound sensor reading and uses it to calculate
+ultrasound sensor reading. Pins are set when constructing the class.
+getSpeedDiff updates the ultrasound sensor readings and uses them to calculate
 the difference in speed that should be applied to motors. The difference 
-should be added to the left motor assuming the ultrasound sensor is mounted
-on the LHS of the chassis.
-getSpeedDiff is a PD controller, which depends on kp, kd and samplingRate
+should be added to the left motor.
+getSpeedDiff is a P controller, distF comes from ultrasound sensor from front
+of the robot. distB comes from ultrasound sensor from back of the robot.
 */
 
-class UsReadingControl: public UsReading
+class UsReadingControl
 {
-  int targetDistance = 0;
-  int usDistance = 0;
+  UsReading usReadingFront, usReadingBack;
   int speedDiff = 0;
   int prevDistance;
   const float kp = 1.0;
   const float kd = 1.0;
   const float samplingRate = 10.0;
+
 public:
-  void setTargetDistance(int);
+  void setPins(int trigF, int echoF, int trigB, int echoB);
+  int getFrontDist();
+  int getBackDist();
   int getSpeedDiff();
 };
