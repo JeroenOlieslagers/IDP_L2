@@ -81,18 +81,18 @@ void RobotMotor::runMotor(bool boo, char motor) {
 	}
 }
 
-void RobotMotor::nudge(char dir){
+void RobotMotor::nudg(char dir){
   if (dir == 'r'){
     currentL -= 50;
     setMotorSpeed(currentL, currentR);
-    delay(500);
+    delay(1000);
     currentL += 50;
     setMotorSpeed(currentL, currentR);
   }
 }
 
 void RobotMotor::turn(char dir) {
-  setMotorSpeed(255, 240);
+  //setMotorSpeed(240, 240);
   myMotorL->run(RELEASE);
   myMotorR->run(RELEASE);
 	//Turns robot 'o' for 180 degrees turn

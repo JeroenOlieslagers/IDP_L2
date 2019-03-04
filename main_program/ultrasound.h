@@ -36,7 +36,7 @@ class UsReadingControl: public UsReading
   int usDistance = 0;
   int speedDiff = 0;
   int prevDistance;
-  const float kp = 3.0;
+  const float kp = 1.0;
   const float kd = 1.0;
   const float samplingRate = 10.0;
 public:
