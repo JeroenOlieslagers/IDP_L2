@@ -30,3 +30,16 @@ public:
   Colour getColour();
   const char* getColourString();
 };
+
+class irReadingStrip :: public irReading
+{
+int irReadingValue = 0;
+int noOfRounds = 0, targetRounds = 0;
+int whiteThresh = 80;
+bool sensorLoHi = false;
+public:
+void updateRounds();
+void resetRounds();
+int getRounds();
+void setTargetRounds(int);
+};

@@ -21,8 +21,8 @@ public:
 	//Sets the speed of each motor (1-250)
 	void setMotorSpeed(int mL, int mR);
 
-  //Changes motor speeds to update path of robot (+ve for right -ve for left)
-  void adjustSpeed(int diff);
+	//Changes motor speeds to update path of robot (+ve for right -ve for left)
+	void adjustSpeed(int diff);
 
 	//Sets motor (L or R) to run (true) or stop (false)
 	void runMotor(bool boo, char motor);
@@ -31,7 +31,7 @@ public:
 	void turn(char dir);
 
   /********TRIAL**********/
-  void nudge(char dir);
+  void nudg(char dir);
 };
 
 

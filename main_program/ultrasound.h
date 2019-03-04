@@ -34,7 +34,11 @@ class UsReadingControl
 {
   UsReading usReadingFront, usReadingBack;
   int speedDiff = 0;
+  int prevDistance;
   const float kp = 1.0;
+  const float kd = 1.0;
+  const float samplingRate = 10.0;
+
 public:
   void setPins(int trigF, int echoF, int trigB, int echoB);
   int getFrontDist();
