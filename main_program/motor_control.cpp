@@ -3,19 +3,34 @@
 Adafruit_MotorShield AFMS = Adafruit_MotorShield();
 Adafruit_DCMotor *myMotorL = AFMS.getMotor(1);
 Adafruit_DCMotor *myMotorR = AFMS.getMotor(4);
+Adafruit_StepperMotor *myServo = AFMS.getStepper(360, 10);
 
 void RobotMotor::start() {
 	//Requirement for motor sheild to start
 	AFMS.begin();
 }
 
-void RobotMotor::setMotors(int mL, int mR) {
+void RobotServo::subtendAngle(int degrees) {
+	//Rotates servo by set amount (-ve is backwards)
+	if (degrees > 0) {
+		myServo->step(degrees, FORWARD);
+	}
+	else {
+		myServo->step(degrees, BACKWARD);
+	}
+}
+
+void RobotServo::setServoSpeed(int speed) {
+	myServo->setSpeed(speed);
+}
+
+void DCMotor::setMotors(int mL, int mR) {
 	//Associated myMotor pointers with pins on motor shield
 	Adafruit_DCMotor *myMotorL = AFMS.getMotor(mL);
 	Adafruit_DCMotor *myMotorR = AFMS.getMotor(mR);
 }
 
-void RobotMotor::setMotorSpeed(int mL, int mR) {
+void DCMotor::setMotorSpeed(int mL, int mR) {
   currentL = mL;
   currentR = mR;
 	//Sets speed of motors
@@ -23,7 +38,7 @@ void RobotMotor::setMotorSpeed(int mL, int mR) {
 	myMotorR->setSpeed(mR);
 }
 
-void RobotMotor::adjustSpeed(int diff){
+void DCMotor::adjustSpeed(int diff){
   //Edge case that left motor reaches max speed
   if(currentL >= 255 - diff && currentR >= 2*diff){
     currentR -= diff;
@@ -57,7 +72,7 @@ void RobotMotor::adjustSpeed(int diff){
   setMotorSpeed(currentL, currentR);
 }
 
-void RobotMotor::runMotor(bool boo, char motor) {
+void DCMotor::runMotor(bool boo, char motor) {
 	//Runs or stops individual motors
 	if (boo && (motor == 'l')) {
 		myMotorL->run(FORWARD);
@@ -81,18 +96,25 @@ void RobotMotor::runMotor(bool boo, char motor) {
 	}
 }
 
-void RobotMotor::nudge(char dir){
+void DCMotor::giveNudge(char dir){
   if (dir == 'r'){
     currentL -= 50;
     setMotorSpeed(currentL, currentR);
-    delay(500);
+    delay(1000);
     currentL += 50;
     setMotorSpeed(currentL, currentR);
   }
+  else if (dir == 'l') {
+	  currentR -= 50;
+	  setMotorSpeed(currentL, currentR);
+	  delay(1000);
+	  currentR += 50;
+	  setMotorSpeed(currentL, currentR);
+  }
 }
 
-void RobotMotor::turn(char dir) {
-  setMotorSpeed(255, 240);
+void DCMotor::turn(char dir) {
+  //setMotorSpeed(240, 240);
   myMotorL->run(RELEASE);
   myMotorR->run(RELEASE);
 	//Turns robot 'o' for 180 degrees turn

@@ -56,23 +56,10 @@ const char* IrReadingColour::getColourString()
     default: return "Undetermined - error";
   }
 }
-/*
-class irReadingStrip :: public irReading
-{
-int irReadingValue = 0;
-int noOfRounds = 0, targetRounds = 0;
-int whiteThresh = 80;
-bool sensorLoHi = false;
-public:
-void updateRounds();
-void resetRounds();
-int getRounds();
-void setTargetRounds(int);
-};
 
 void irReadingStrip::updateRounds()
 {
-sensorIrValue = irR
+int sensorIrValue = irReadingValue;
 if (!sensorLoHi && sensorIrValue > whiteThresh)
 {
 sensorLoHi = true;
@@ -86,6 +73,7 @@ sensorLoHi = false;
 
 int irReadingStrip::getRounds()
 {
+updateRounds();
 return noOfRounds;
 }
 
@@ -94,8 +82,7 @@ void irReadingStrip::resetRounds()
 noOfRounds = 0;
 }
 
-void setTargetRounds(int target)
+void irReadingStrip::setTargetRounds(int target)
 {
 targetRounds = target;
 }
-*/
