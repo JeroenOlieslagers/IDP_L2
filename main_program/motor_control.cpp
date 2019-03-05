@@ -44,7 +44,7 @@ void DCMotor::adjustSpeed(int diff){
     currentR -= diff;
   }
   else if(currentL >= 255 - diff){
-    Serial.println('ERROR, CANNOT DECREASE R FURTHER');
+    Serial.println("ERROR, CANNOT DECREASE R FURTHER");
   }
   //Edge case that right motor reaches min speed
   else if(currentL <= 255 - (2 * diff) && currentR <= diff){
@@ -55,7 +55,7 @@ void DCMotor::adjustSpeed(int diff){
     currentR -= diff;
   }
   else{
-    Serial.println('wtf');
+    Serial.println("wtf");
   }
   if (currentL > 255){
     currentL = 255;
