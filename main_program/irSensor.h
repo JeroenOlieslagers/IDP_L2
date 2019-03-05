@@ -31,11 +31,13 @@ public:
   const char* getColourString();
 };
 
-class irReadingStrip :: public irReading
+class irReadingStrip : public IrReading
 {
 int irReadingValue = 0;
-int noOfRounds = 0, targetRounds = 0;
+int noOfRounds = 0;
+int targetRounds = 0;
 int whiteThresh = 80;
+int loIrThresh = 20; //---------------CHECK THIS--------------//
 bool sensorLoHi = false;
 public:
 void updateRounds();

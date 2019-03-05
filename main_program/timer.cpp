@@ -4,7 +4,7 @@ void Timer::reset() {
 	initTime = millis();
 }
 
-int Timer::getTime() {
+long Timer::getTime() {
 	passedTime = millis();
 	return passedTime - initTime;
 }

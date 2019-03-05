@@ -13,7 +13,7 @@ public:
 	void reset();
 
 	//Returns time (in milliseconds) since last reset
-	int getTime();
+	long getTime();
 
 	//Retusn time (to nearest second) since last reset
 	int getSeconds();
