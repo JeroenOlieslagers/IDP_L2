@@ -59,7 +59,7 @@ const char* IrReadingColour::getColourString()
 
 void irReadingStrip::updateRounds()
 {
-sensorIrValue = irR
+int sensorIrValue = irReadingValue;
 if (!sensorLoHi && sensorIrValue > whiteThresh)
 {
 sensorLoHi = true;
@@ -82,7 +82,7 @@ void irReadingStrip::resetRounds()
 noOfRounds = 0;
 }
 
-void setTargetRounds(int target)
+void irReadingStrip::setTargetRounds(int target)
 {
 targetRounds = target;
 }
