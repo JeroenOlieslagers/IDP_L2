@@ -34,11 +34,15 @@ class UsReadingControl
 {
   UsReading usReadingFront, usReadingBack;
   int speedDiff = 0;
+<<<<<<< Updated upstream
   int prevDistance;
   const float kp = 1.0;
   const float kd = 1.0;
   const float samplingRate = 10.0;
 
+=======
+  const float kp = 0.2;
+>>>>>>> Stashed changes
 public:
   void setPins(int trigF, int echoF, int trigB, int echoB);
   int getFrontDist();
